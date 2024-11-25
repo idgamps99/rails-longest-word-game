@@ -15,6 +15,8 @@ class GamesController < ApplicationController
       @result = "Sorry, but #{@word} can't be build out of #{@grid.join(",")} "
     else
       @result = "Congratulations! #{@word} is a valid English word!"
+      session[:score] += @word.length
+      @score = session[:score]
     end
   end
 
