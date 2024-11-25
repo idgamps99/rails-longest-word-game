@@ -9,14 +9,14 @@ class GamesController < ApplicationController
   def score
     @word = params[:word]
     @grid = JSON.parse(params[:grid])
+    @score = session[:score]
     if !search_dict
       @result = "Sorry, but #{@word} doesn't seem to be a valid English word..."
     elsif !check_in_grid
       @result = "Sorry, but #{@word} can't be build out of #{@grid.join(",")} "
     else
-      @result = "Congratulations! #{@word} is a valid English word!"
-      session[:score] += @word.length
-      @score = session[:score]
+      @result = "Congratulations! #{@word.capitalize} is a valid English word!"
+      @score = (session[:score] += @word.length)
     end
   end
 
